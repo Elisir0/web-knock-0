@@ -37,4 +37,4 @@ origin  https://github.com/Elisir0/web-knock-0.git (push)
 - 該当ブランチ上でファイルを修正し，コミットを行った．
 
 ### 実行結果
-test.
+develop
