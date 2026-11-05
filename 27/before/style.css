@@ -1,0 +1,87 @@
+/* =====================================================================
+   before/style.css ― 改善前（課題26までの段階）のスタイル
+   改善点：文字色 #999 と白背景のコントラスト比は約 2.8:1 しかなく、
+   Lighthouse のコントラスト指摘の対象になる
+   ===================================================================== */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #ffffff;
+  color: #999999; /* ※ コントラスト不足（改善前） */
+  line-height: 1.7;
+}
+
+.header {
+  background: #f0f0f0;
+  border-bottom: 1px solid #cccccc;
+  padding: 16px 24px;
+}
+
+.header h1 { color: #777777; font-size: 24px; }
+
+.nav { margin-top: 8px; }
+
+.nav a {
+  color: #999999; /* ※ リンクのコントラスト不足 */
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.content {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 24px;
+}
+
+.section {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.section h3 { color: #888888; margin-bottom: 12px; }
+
+.section img { float: left; margin-right: 16px; border-radius: 8px; }
+
+.section a { color: #999999; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid #dddddd;
+  padding: 6px 8px;
+  color: #999999;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  font-size: 15px;
+  color: #777777;
+}
+
+form input[type="submit"] {
+  background: #bbbbbb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.footer {
+  background: #f0f0f0;
+  color: #aaaaaa;
+  text-align: center;
+  padding: 16px;
+}

@@ -1,0 +1,346 @@
+/* =====================================================================
+   style.css ― 課題22（CSS変数）・課題23（レスポンシブ）・
+               課題26（Grid/Flexbox レイアウト）・課題27（アクセシビリティ）
+   ===================================================================== */
+
+/* ---------- ① CSS変数（カスタムプロパティ）：色・余白・サイズを一元管理 ---------- */
+:root {
+  /* 色：コントラスト比を意識して選定（本文 ≈ 13:1、リンク ≈ 6.3:1） */
+  --main-color:   #1a5fb4;  /* メインカラー（見出し・リンク・ボタン） */
+  --main-dark:    #1f2933;  /* 濃いテキスト色（フッター背景にも使用） */
+  --accent-color: #26a69a;
+  --bg-color:     #f5f7fa;  /* ページ背景 */
+  --card-bg:      #ffffff;  /* カード（セクション）背景 */
+  --text-color:   #1f2933;  /* 本文の文字色 */
+  --text-muted:   #52606d;  /* 補足テキスト（コントラスト比 ≈ 7:1） */
+  --placeholder:  #556575;  /* プレースホルダ（コントラスト比 ≈ 5.9:1） */
+  --border-color: #d9e2ec;
+  --th-bg:        #e3ecf7;  /* テーブル見出し背景 */
+  --focus-color:  #f59e0b;  /* フォーカスリングの色 */
+
+  /* 余白・サイズ */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --radius: 8px;
+  --max-width: 1080px;
+  --font-base: 16px;
+
+  /* フォント */
+  --font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+                 "Yu Gothic UI", Meiryo, sans-serif;
+}
+
+/* ---------- ② リセットと基本スタイル ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: var(--font-base); }
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.7;
+}
+
+/* =====================================================================
+   ③ スキップリンク（アクセシビリティ改善点）
+   通常は画面外。Tabキーでフォーカスされたときだけ画面に現れる
+   ===================================================================== */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 8px;
+  z-index: 1000;
+  background: var(--card-bg);
+  color: var(--main-color);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-weight: bold;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+/* =====================================================================
+   ④ <header>：Flexbox でロゴとナビを左右に配置（課題26）
+   ===================================================================== */
+.site-header {
+  background: var(--card-bg);
+  border-bottom: 3px solid var(--main-color);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;                    /* Flexbox */
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.site-title {
+  color: var(--main-color);
+  font-size: 1.6rem;
+}
+
+.nav-list {
+  display: flex;                    /* Flexbox */
+  list-style: none;
+  gap: var(--space-md);
+}
+
+.nav-list a {
+  display: inline-block;
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;               /* タップターゲットを十分な大きさに */
+  border-radius: var(--radius);
+}
+
+.nav-list a:hover {
+  background: var(--th-bg);
+  text-decoration: underline;
+}
+
+/* =====================================================================
+   ⑤ ページ全体のレイアウト：CSS Grid（課題26）
+   メイン（1fr）＋サイドバー（300px）の2カラム
+   ===================================================================== */
+.page-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg);
+  display: grid;                                    /* CSS Grid */
+  grid-template-columns: minmax(0, 1fr) 300px;      /* 本文 + サイドバー */
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* ---------- カード（各 <section>・<aside> の共通スタイル） ---------- */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+  color: var(--main-color);
+  font-size: 1.35rem;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.card + .card { margin-top: var(--space-lg); }
+
+.card h3 {
+  font-size: 1.05rem;
+  margin: var(--space-md) 0 var(--space-sm);
+}
+
+/* ---------- プロフィール：画像と文章を Flexbox で横並び ---------- */
+.profile-flex {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 4px solid var(--main-color);
+  flex-shrink: 0;
+}
+
+.profile-text { flex: 1; min-width: 240px; }
+
+.profile-text ul {
+  margin-left: 1.5em;
+  margin-bottom: var(--space-sm);
+}
+
+.profile-text a {
+  color: var(--main-color);
+}
+
+/* =====================================================================
+   ⑥ テーブル（課題25）：表を横スクロール可能にしてスマホでも崩れないように
+   ===================================================================== */
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-sm);
+}
+
+th, td {
+  border: 1px solid var(--border-color);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+thead th {
+  background: var(--th-bg);
+  color: var(--text-color);
+}
+
+tbody th {
+  background: #f0f5fb;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) td { background: #fafcfe; }
+
+/* =====================================================================
+   ⑦ フォーム（課題24）：各入力欄に <label for> を対応付け
+   ===================================================================== */
+.form-item {
+  margin-bottom: var(--space-md);
+}
+
+.form-item label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.required-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: #c62828;      /* 濃い赤：白文字とのコントラスト ≈ 7.6:1 */
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--placeholder);   /* コントラスト比に配慮した色 */
+}
+
+button[type="submit"] {
+  background: var(--main-color);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover { background: #1554a0; }
+
+/* ---------- ⑧ フォーカススタイル（アクセシビリティ改善点） ----------
+   キーボード操作時、今どこにフォーカスがあるかを明確に表示する */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* ---------- サイドバー ---------- */
+.profile-dl dt {
+  font-weight: bold;
+  color: var(--main-color);
+  margin-top: var(--space-sm);
+}
+
+.profile-dl dd {
+  margin-left: 1em;
+  color: var(--text-color);
+}
+
+/* ---------- フッター ---------- */
+.site-footer {
+  background: var(--main-dark);
+  color: #f5f7fa;              /* 白系文字：コントラスト ≈ 15:1 */
+  text-align: center;
+  padding: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.site-footer p + p {
+  color: #cbd2d9;
+  font-size: 0.85rem;
+  margin-top: var(--space-sm);
+}
+
+/* =====================================================================
+   ⑨ レスポンシブ対応（課題23）：600px 以下（スマートフォン幅）で切り替え
+   ===================================================================== */
+@media (max-width: 600px) {
+  :root {
+    --font-base: 15px;      /* 文字サイズを少し小さく */
+    --space-lg: 20px;       /* 余白も小さく */
+  }
+
+  /* Grid を 1 カラムに：サイドバーは本文の下へ */
+  .page-grid {
+    grid-template-columns: 1fr;
+    padding: var(--space-md);
+  }
+
+  /* ヘッダー：ロゴとナビを縦に積む */
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+  }
+
+  .site-title { font-size: 1.3rem; }
+
+  .nav-list { gap: 4px; }
+
+  .nav-list a { padding: 8px 10px; }
+
+  /* プロフィール：画像を上に、文章を下に */
+  .profile-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-text { min-width: 0; }
+
+  .card { padding: var(--space-md); }
+
+  .site-footer { padding: var(--space-md); }
+}

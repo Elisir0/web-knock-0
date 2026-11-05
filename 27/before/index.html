@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<!-- ※ 改善前の状態：lang 属性なし（Lighthouse 指摘：html-has-lang） -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自己紹介ページ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ※ 改善前：div だけで構成。ランドマーク（main など）がない（Lighthouse 指摘：landmark-one-main） -->
+  <div class="header">
+    <h1>黄亦楠の自己紹介</h1>
+    <div class="nav">
+      <a href="#profile">プロフィール</a>
+      <a href="#schedule">時間割</a>
+      <a href="#contact">問い合わせ</a>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="section" id="profile">
+      <!-- ※ 改善前：h1 の次が h3。見出しレベルが飛んでいる（Lighthouse 指摘：heading-order） -->
+      <h3>プロフィール</h3>
+      <!-- ※ 改善前：img に alt 属性なし（Lighthouse 指摘：image-alt） -->
+      <img src="../avatar.svg" width="160" height="160">
+      <p>
+        はじめまして。九州大学大学院芸術工学府の研究生です。
+      </p>
+      <p>趣味：趣味A、趣味B、趣味C</p>
+      <!-- ※ 改善前：リンクテキストが「こちら」で行き先がわからない（手動改善点：リンクの明確化） -->
+      <p>詳細は<a href="https://www.kyushu-u.ac.jp/ja/" target="_blank">こちら</a></p>
+    </div>
+
+    <div class="section" id="schedule">
+      <h3>授業時間割</h3>
+      <table>
+        <!-- ※ 改善前：thead/th/scope を使わない表（Lighthouse 指摘：td-has-header） -->
+        <tr>
+          <td>時限</td><td>月</td><td>火</td><td>水</td><td>木</td><td>金</td>
+        </tr>
+        <tr>
+          <td>1限</td><td>科目A</td><td>科目B</td><td>科目C</td><td>科目A</td><td>科目D</td>
+        </tr>
+        <tr>
+          <td>2限</td><td>科目D</td><td>科目A</td><td>科目E</td><td>科目B</td><td>科目C</td>
+        </tr>
+        <tr>
+          <td>3限</td><td>科目B</td><td>科目E</td><td>科目A</td><td>科目C</td><td>科目A</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section" id="contact">
+      <h3>お問い合わせ</h3>
+      <!-- ※ 改善前：label なし・placeholder のみ（手動改善点：label 対応付け） -->
+      <form action="#" method="post">
+        <input type="text" placeholder="名前" required>
+        <input type="email" placeholder="メールアドレス" required>
+        <textarea placeholder="メッセージ"></textarea>
+        <input type="submit" value="送信">
+      </form>
+    </div>
+
+  </div>
+
+  <div class="footer">Copyright 2026 黄亦楠</div>
+
+</body>
+</html>

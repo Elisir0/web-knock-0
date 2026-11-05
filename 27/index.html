@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黄亦楠の自己紹介 | ポートフォリオ</title>
+  <meta name="description" content="黄亦楠の自己紹介ページ。プロフィール・趣味・授業時間割・お問い合わせフォームを掲載。課題27：セマンティックHTMLとアクセシビリティ。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= スキップリンク（アクセシビリティ改善点） =================
+       キーボード操作の利用者がナビゲーションを飛ばして本文へ直行できる -->
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <!-- ================= ① <header>：ページのヘッダー ================= -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-brand">
+        <!-- ページ内で h1 は 1 つだけ（見出し階層の先頭） -->
+        <h1 class="site-title">黄亦楠の自己紹介</h1>
+      </div>
+      <!-- ② <nav>：ナビゲーション。aria-label でランドマークを区別 -->
+      <nav aria-label="メインナビゲーション">
+        <ul class="nav-list">
+          <li><a href="#profile">プロフィール</a></li>
+          <li><a href="#schedule">授業時間割</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= レイアウト全体：CSS Grid（課題26） ================= -->
+  <div class="page-grid">
+
+    <!-- ================= ③ <main>：本文。スキップリンクの飛び先 ================= -->
+    <main id="main">
+
+      <!-- ④ <section>：プロフィール -->
+      <section id="profile" class="card" aria-labelledby="profile-heading">
+        <h2 id="profile-heading">プロフィール</h2>
+        <div class="profile-flex">
+          <!-- 画像には内容を説明する alt 属性（課題21・アクセシビリティ） -->
+          <img src="avatar.svg" alt="顔絵イラスト" width="160" height="160" class="avatar">
+          <div class="profile-text">
+            <p>
+              はじめまして。九州大学大学院芸術工学府の研究生です。
+            </p>
+            <!-- h2 の次は h3。見出しレベルを飛ばさない -->
+            <h3>趣味・好きなこと</h3>
+            <ul>
+              <li>趣味A</li>
+              <li>趣味B</li>
+              <li>趣味C</li>
+            </ul>
+            <p>
+              所属大学の詳細は
+              <!-- リンクテキストで行き先がわかる（「こちら」ではなく） -->
+              <a href="https://www.kyushu-u.ac.jp/ja/" target="_blank" rel="noopener">
+                九州大学の公式サイト（新しいタブで開きます）
+              </a>
+              をご覧ください。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ④ <section>：授業時間割テーブル（課題25） -->
+      <section id="schedule" class="card" aria-labelledby="schedule-heading">
+        <h2 id="schedule-heading">今学期の授業時間割</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>2026年度 後期 授業時間割（月〜金）</caption>
+            <thead>
+              <tr>
+                <!-- scope="col"：見出しセルが「列」の見出しであることを明示 -->
+                <th scope="col">時限</th>
+                <th scope="col">月曜日</th>
+                <th scope="col">火曜日</th>
+                <th scope="col">水曜日</th>
+                <th scope="col">木曜日</th>
+                <th scope="col">金曜日</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1限</th>
+                <td>科目A</td><td>科目B</td><td>科目C</td><td>科目A</td><td>科目D</td>
+              </tr>
+              <tr>
+                <th scope="row">2限</th>
+                <td>科目D</td><td>科目A</td><td>科目E</td><td>科目B</td><td>科目C</td>
+              </tr>
+              <tr>
+                <th scope="row">3限</th>
+                <td>科目B</td><td>科目E</td><td>科目A</td><td>科目C</td><td>科目A</td>
+              </tr>
+              <tr>
+                <th scope="row">4限</th>
+                <td>科目C</td><td>科目D</td><td>科目B</td><td>科目E</td><td>科目B</td>
+              </tr>
+              <tr>
+                <th scope="row">5限</th>
+                <td>科目E</td><td>科目C</td><td>科目D</td><td>科目A</td><td>科目E</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ④ <section>：お問い合わせフォーム（課題24） -->
+      <section id="contact" class="card" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">お問い合わせ</h2>
+        <form action="#" method="post">
+          <div class="form-item">
+            <!-- <label> と for 属性で入力欄を対応付け（必須） -->
+            <label for="name">お名前 <span class="required-badge" aria-hidden="true">必須</span></label>
+            <input type="text" id="name" name="name" required
+                   autocomplete="name" placeholder="例：黄亦楠">
+          </div>
+          <div class="form-item">
+            <!-- type="email" + required：ブラウザの入力チェックを利用（課題24） -->
+            <label for="email">メールアドレス <span class="required-badge" aria-hidden="true">必須</span></label>
+            <input type="email" id="email" name="email" required
+                   autocomplete="email" placeholder="例：yinan@example.com">
+          </div>
+          <div class="form-item">
+            <label for="kind">お問い合わせ種別</label>
+            <select id="kind" name="kind">
+              <option value="question">質問</option>
+              <option value="request">依頼</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label for="message">メッセージ</label>
+            <textarea id="message" name="message" rows="5" placeholder="ご用件をお書きください"></textarea>
+          </div>
+          <button type="submit">送信する</button>
+        </form>
+      </section>
+
+    </main>
+
+    <!-- ================= ⑤ <aside>：補足情報のサイドバー ================= -->
+    <aside class="sidebar card" aria-labelledby="sidebar-heading">
+      <h2 id="sidebar-heading">基本情報</h2>
+      <dl class="profile-dl">
+        <dt>名前</dt><dd>黄亦楠</dd>
+        <dt>学年</dt><dd>研究生</dd>
+        <dt>専攻</dt><dd>芸術工学</dd>
+        <dt>出身</dt><dd>上海</dd>
+      </dl>
+    </aside>
+
+  </div>
+
+  <!-- ================= ⑥ <footer>：ページのフッター ================= -->
+  <footer class="site-footer">
+    <p>&copy; 2026 黄亦楠</p>
+    <p>テーマ2「HTML・CSSの基本とWebページ公開」課題27：セマンティックHTMLとアクセシビリティ</p>
+  </footer>
+
+</body>
+</html>
